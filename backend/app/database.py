@@ -36,7 +36,7 @@ def _resolve_database_url() -> str:
         )
     )
     if configured_url:
-        return configured_url.strip()
+        return _normalize_database_url(configured_url)
 
     if APP_ENV == "production":
         raise RuntimeError(
@@ -44,6 +44,16 @@ def _resolve_database_url() -> str:
         )
 
     return f"sqlite:///{(BASE_DIR / 'data' / 'crimevista.db').as_posix()}"
+
+
+def _normalize_database_url(database_url: str) -> str:
+    database_url = database_url.strip()
+    url = make_url(database_url)
+    if url.drivername in ("postgres", "postgresql"):
+        return url.set(drivername="postgresql+psycopg").render_as_string(
+            hide_password=False
+        )
+    return database_url
 
 
 DATABASE_URL = _resolve_database_url()

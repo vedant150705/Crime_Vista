@@ -44,6 +44,7 @@ DATASET_PATH=/opt/render/project/src/backend/data/initial/your_city_crime_data.c
 Notes:
 
 - `API_ADMIN_TOKEN` is required in production and remains server-side; it signs the administrator session and supports direct bearer-authenticated API use.
+- Render may provide `DATABASE_URL` with a `postgres://` or `postgresql://` scheme; the backend converts these to the installed psycopg driver automatically.
 - `ADMIN_USERNAME` and `ADMIN_PASSWORD` provision the single administrator login. There is no public registration.
 - Sign-in issues a 30-day `HttpOnly`, `Secure`, `SameSite=Strict` cookie. The browser never stores the API token or administrator password.
 - Set all three authentication variables in Render before deploying the new login flow. Then sign in from Settings once per browser.
