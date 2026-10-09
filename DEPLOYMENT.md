@@ -50,6 +50,7 @@ Notes:
 - CSV upload returns immediately with a queued upload ID; the UI polls the protected status endpoint while the backend validates and replaces the dataset. Do not start another upload until the current one finishes.
 - `FRONTEND_URL` and `CORS_ORIGINS` should point to the public Render URL.
 - If you use same-origin hosting, a single service origin is often enough; `CORS_ORIGINS` remains optional for local dev.
+- Never commit a real database connection string or other credentials. Rotate any credentials that were previously committed.
 
 ## Startup behavior
 
@@ -74,4 +75,3 @@ The Render health check expects:
 Local development is still supported by leaving `APP_ENV` unset or set to `development`, which allows an SQLite fallback when no database URL is configured.
 
 Do not rely on SQLite for production workloads.
-postgresql://crimevista_user:PdhxCm2ZoZuSr8ZaSECnCMlqgDGyWc1Q@dpg-db0lslmgekts73a9at9g-a/crimevista
